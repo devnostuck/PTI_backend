@@ -17,14 +17,13 @@ import java.util.List;
  */
 public class ControllerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private userDAO bookDAO;
+    private UserDAO userDAO;
 
     public void init() {
         String jdbcURL = getServletContext().getInitParameter("jdbcURL");
         String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
         String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
-        System.out.println("initServlet");
-        bookDAO = new userDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        userDAO = new UserDAO(jdbcURL, jdbcUsername, jdbcPassword);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -44,9 +43,8 @@ public class ControllerServlet extends HttpServlet {
 
     private void listBook(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<User> listUser = bookDAO.listAllUsers();
+        List<User> listUser = userDAO.listAllUsers();
         String usersJsonString = new Gson().toJson(listUser);
-        System.out.println(usersJsonString);
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
