@@ -1,5 +1,6 @@
 package pti.dao;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,32 +53,9 @@ public class UserDAO {
             }
         }
 
-
-        public List<User> listAllUsers() throws SQLException {
-            List<User> listUser = new ArrayList<>();
-
-            String sql = "SELECT * FROM users";
-
-            connect();
-
-            Statement statement = jdbcConnection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String fname = resultSet.getString("first_name");
-                String lname = resultSet.getString("last_name");
-                int age = resultSet.getInt("age");
-                String gender = resultSet.getString("gender");
-
-                User user = new User(id, fname, lname, age, gender);
-                listUser.add(user);
-            }
-            System.out.println(listUser.toString());
-            resultSet.close();
-            statement.close();
-            disconnect();
-
-            return listUser;
+        public List<User> listAllUsers() {
+            Session session = sessionFactory.getCurrentSession();
+            return session.createQuery("from users").list();
         }
+        
     }
