@@ -90,4 +90,44 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getGroupname() {
+        return groupname;
+    }
 }

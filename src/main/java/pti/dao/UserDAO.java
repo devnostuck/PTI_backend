@@ -16,17 +16,17 @@ import java.sql.SQLException;
 
 @Repository
 public class UserDAO {
-        private String jdbcURL;
-        private String jdbcUsername;
-        private String jdbcPassword;
-        private Connection jdbcConnection;
+    private String jdbcURL;
+    private String jdbcUsername;
+    private String jdbcPassword;
+    private Connection jdbcConnection;
 
-        private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
-        @Autowired
-        public void setSessionFactory(SessionFactory sessionFactory) {
-            this.sessionFactory = sessionFactory;
-        }
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
         /* UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
             this.jdbcURL = jdbcURL;
@@ -52,12 +52,36 @@ public class UserDAO {
             }
         }
         */
-        @Transactional
-        public List<User> listAllUsers() {
-            System.out.println();
+    @Transactional
+    public List<User> listAllUsers() {
+    Session session = sessionFactory.getCurrentSession();
 
-            Session session = sessionFactory.getCurrentSession();
-            return session.createQuery("from User").list();
-        }
+    return session.createQuery("from User").list();
+    }
+
+    @Transactional
+    public User getUser (int id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.find(User.class, id);
+    }
+
+    @Transactional
+    public void addUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(user);
+    }
+
+    @Transactional
+    public void editUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(user);
+    }
+
+    @Transactional
+    public void deleteUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(user);
+    }
 
     }
