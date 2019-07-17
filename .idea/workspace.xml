@@ -145,8 +145,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="143" />
-    <option name="y" value="55" />
+    <option name="x" value="141" />
+    <option name="y" value="39" />
     <option name="width" value="1161" />
     <option name="height" value="641" />
   </component>
@@ -337,7 +337,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../testweb/src/main/java/UserDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="68" />
