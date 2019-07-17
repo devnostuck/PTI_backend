@@ -57,5 +57,5 @@ public class UserDAO {
             Session session = sessionFactory.getCurrentSession();
             return session.createQuery("from users").list();
         }
-        
+
     }
