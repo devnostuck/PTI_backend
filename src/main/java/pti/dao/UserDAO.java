@@ -1,5 +1,7 @@
 package pti.dao;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pti.models.User;
 import java.sql.*;
@@ -18,6 +20,13 @@ public class UserDAO {
         private String jdbcUsername;
         private String jdbcPassword;
         private Connection jdbcConnection;
+
+        private SessionFactory sessionFactory;
+
+        @Autowired
+        public void setSessionFactory(SessionFactory sessionFactory) {
+            this.sessionFactory = sessionFactory;
+        }
 
         public UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
             this.jdbcURL = jdbcURL;
