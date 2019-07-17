@@ -4,18 +4,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pti.models.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.sql.SQLException;
+
+@Repository
 public class UserDAO {
         private String jdbcURL;
         private String jdbcUsername;
@@ -29,7 +28,7 @@ public class UserDAO {
             this.sessionFactory = sessionFactory;
         }
 
-        public UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+        /* UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
             this.jdbcURL = jdbcURL;
             this.jdbcUsername = jdbcUsername;
             this.jdbcPassword = jdbcPassword;
@@ -52,10 +51,13 @@ public class UserDAO {
                 jdbcConnection.close();
             }
         }
-
+        */
+        @Transactional
         public List<User> listAllUsers() {
+            System.out.println();
+
             Session session = sessionFactory.getCurrentSession();
-            return session.createQuery("from users").list();
+            return session.createQuery("from User").list();
         }
 
     }

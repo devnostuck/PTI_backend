@@ -7,6 +7,10 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+    public User() {
+
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
