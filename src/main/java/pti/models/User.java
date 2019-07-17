@@ -1,10 +1,43 @@
+package pti.models;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+
+    @Column(name = "username")
+    String username;
+
+    @Column(name = "first_name")
     String first_name;
+
+    @Column(name = "last_name")
     String last_name;
+
+    @Column(name = "patronymic")
+    String patronymic;
+
+    @Column(name = "age")
     int age;
+
+    @Column(name = "gender")
     String gender;
+
+    @Column(name = "role")
+    String role;
+
+    @Column(name = "department")
+    String department;
+
+    @Column(name = "groupname")
+    String groupname;
 
     public User(int id, String first_name, String last_name, int age, String gender) {
         this.id = id;
