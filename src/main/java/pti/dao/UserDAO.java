@@ -1,87 +1,41 @@
 package pti.dao;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import pti.models.Model;
 import pti.models.User;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
-
-import java.sql.SQLException;
 
 @Repository
-public class UserDAO {
-    private String jdbcURL;
-    private String jdbcUsername;
-    private String jdbcPassword;
-    private Connection jdbcConnection;
+public class UserDAO extends AbDAO {
 
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-        /* UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
-            this.jdbcURL = jdbcURL;
-            this.jdbcUsername = jdbcUsername;
-            this.jdbcPassword = jdbcPassword;
-        }
-
-        protected void connect() throws SQLException {
-            if (jdbcConnection == null || jdbcConnection.isClosed()) {
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                } catch (ClassNotFoundException e) {
-                    throw new SQLException(e);
-                }
-                jdbcConnection = DriverManager.getConnection(
-                        jdbcURL, jdbcUsername, jdbcPassword);
-            }
-        }
-
-        protected void disconnect() throws SQLException {
-            if (jdbcConnection != null && !jdbcConnection.isClosed()) {
-                jdbcConnection.close();
-            }
-        }
-        */
-    @Transactional
-    public List<User> listAllUsers() {
-    Session session = sessionFactory.getCurrentSession();
-
-    return session.createQuery("from User").list();
-    }
-
-    @Transactional
-    public User getUser (int id) {
+    @Override
+    public User get(int id) {
         Session session = sessionFactory.getCurrentSession();
 
         return session.find(User.class, id);
     }
 
-    @Transactional
-    public void addUser(User user) {
+    @Override
+    public void edit(int id, Model model) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(user);
+        User userToEdit = get(id);
+        User user = (User)model;
+        userToEdit.setUsername(user.getUsername());
+        userToEdit.setPassword(user.getPassword());
+        userToEdit.setFirst_name(user.getFirst_name());
+        userToEdit.setLast_name(user.getLast_name());
+        userToEdit.setPatronymic(user.getPatronymic());
+        userToEdit.setAge(user.getAge());
+        userToEdit.setGender(user.getGender());
+        userToEdit.setRole(user.getRole());
+        userToEdit.setDepartment(user.getDepartment());
+        userToEdit.setGroupname(user.getGroupname());
+        session.update(userToEdit);
     }
 
-    @Transactional
-    public void editUser(User user) {
+    @Override
+    public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(user);
+        session.delete(session.find(User.class,id));
     }
-
-    @Transactional
-    public void deleteUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.delete(user);
-    }
-
-    }
+}

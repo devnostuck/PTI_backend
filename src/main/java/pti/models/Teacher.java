@@ -1,10 +1,10 @@
 package pti.models;
 
 public class Teacher {
-    int id;
-    String username;
-    String description;
-    String image;
+    private int id;
+    private String username;
+    private String description;
+    private String image;
 
     public Teacher() {
 

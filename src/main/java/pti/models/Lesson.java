@@ -1,67 +1,68 @@
 package pti.models;
 
-public class Lesson {
 
-    int id;
-    String groupa;
-    String week_color;
-    String day;
-    int para;
-    String lesson_name;
-    String teacher;
-    String room;
-    String type;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "schedule")
+public class Lesson implements Model {
+
+    @Id
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "group_name")
+    private String groupName;
+
+    @Column(name = "lesson_date")
+    private String lessonDate;
+
+    @Column(name = "lesson_name")
+    private String name;
+
+    @Column(name = "teacher")
+    private String teacher;
+
+    @Column(name = "room")
+    private String room;
 
     public Lesson() {
 
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getGroupa() {
-        return groupa;
+    public int getId() {
+        return id;
     }
 
-    public void setGroupa(String groupa) {
-        this.groupa = groupa;
+    public String getGroup_name() {
+        return groupName;
     }
 
-    public String getWeek_color() {
-        return week_color;
+    public void setGroup_name(String group_name) {
+        this.groupName = group_name;
     }
 
-    public void setWeek_color(String week_color) {
-        this.week_color = week_color;
+    public String getLesson_date() {
+        return lessonDate;
     }
 
-    public String getDay() {
-        return day;
+    public void setLesson_date(String date) {
+        this.lessonDate = date;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public String setLesson_name() {
+        return name;
     }
 
-    public int getPara() {
-        return para;
-    }
-
-    public void setPara(int para) {
-        this.para = para;
-    }
-
-    public String getLesson_name() {
-        return lesson_name;
-    }
-
-    public void setLesson_name(String lesson_name) {
-        this.lesson_name = lesson_name;
+    public void setLesson_name(String name) {
+        this.name = name;
     }
 
     public String getTeacher() {
@@ -78,13 +79,5 @@ public class Lesson {
 
     public void setRoom(String room) {
         this.room = room;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
